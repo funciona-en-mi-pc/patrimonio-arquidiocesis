@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedButton
@@ -16,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.patrimonioarquidiocesis.viewmodel.RegistroViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 
@@ -32,14 +34,15 @@ fun CrearCuentaScreen(
             .verticalScroll(rememberScrollState())
             .padding(32.dp)
     ) {
-        Text(text = "Crea Tu cuenta")
+        Text(text = "Crea tu cuenta",
+            fontSize = 23.sp)
         Text(text = "Unete a la red para explorar templos, planificar visitas y coordinar rutas patrimoniales.")
 
         OutlinedTextField(
             value = registroViewModel.nombre,
             onValueChange = { registroViewModel.cambiarNombre(it) },
             label = { Text("Nombre completo") },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
         )
 
         OutlinedTextField(
@@ -80,12 +83,13 @@ fun CrearCuentaScreen(
         Text(text = "Los perfiles de Encargado de templo se habilitan por la adminitraciopn de cada reciento. ")
 
         Button(
-            onClick = {},
-            modifier = Modifier.fillMaxWidth()
+            onClick = {registroViewModel.crearCuenta()},
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(3.dp)
         ){
             Text(text = "Crear cuenta")
         }
-
+        Text(text = registroViewModel.mensaje)
         Text(text = "¿Ya tienes cuenta? Inicia sesion")
     }
 }

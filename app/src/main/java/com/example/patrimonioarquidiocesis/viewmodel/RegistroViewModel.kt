@@ -4,6 +4,8 @@ import androidx.compose.runtime.getValue //Por el By recuerda el set
 import androidx.compose.runtime.mutableStateOf //MutableStateOf
 import androidx.compose.runtime.setValue //Por el By recuerda el get
 import androidx.lifecycle.ViewModel
+import com.example.patrimonioarquidiocesis.model.Usuario
+
 
 
 class RegistroViewModel : ViewModel() {
@@ -21,6 +23,9 @@ class RegistroViewModel : ViewModel() {
     var tipoParticipacion by mutableStateOf("Turista")
         private set
 
+    var mensaje by mutableStateOf("")
+        private set
+
     fun cambiarNombre(nuevoNombre: String){
         nombre = nuevoNombre
     }
@@ -35,6 +40,18 @@ class RegistroViewModel : ViewModel() {
 
     fun cambiarTipoParticipacion (nuevoTipoParticipacion: String){
         tipoParticipacion = nuevoTipoParticipacion
+    }
+
+
+    fun crearCuenta(){
+        if (nombre.isBlank() || mail.isBlank() || pass.isBlank()){
+            mensaje = "Por favor completar todos los campos"
+        } else if (!mail.contains("@")){
+            mensaje = "El correo no es valido"
+        }else{
+            val nuevoUsuario = Usuario(nombre, mail, pass, tipoParticipacion)
+            mensaje = "Cuenta creada para ${nuevoUsuario}"
+        }
     }
 
 }
