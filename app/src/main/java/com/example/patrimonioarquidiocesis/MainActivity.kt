@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.patrimonioarquidiocesis.navigation.AppNavHost
 import com.example.patrimonioarquidiocesis.ui.theme.PatrimonioArquidiocesisTheme
 import com.example.patrimonioarquidiocesis.view.CrearCuentaScreen
 
@@ -17,7 +18,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PatrimonioArquidiocesisTheme {
-                CrearCuentaScreen()
+            AppNavHost()
+            //CrearCuentaScreen()
                 /*Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
                         name = "Android",
