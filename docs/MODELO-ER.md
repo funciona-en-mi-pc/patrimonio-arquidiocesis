@@ -130,3 +130,15 @@ erDiagram
 | **Galería (#4)** | El mockup muestra 1 imagen (hero) | `galeriaMultimedia` permite varias; se puede mostrar 1 ahora y ampliar después. |
 
 > Todo lo que el mockup tiene y la BD **no** respalda, no se inventa: se agrega como hueco aquí y se resuelve en etapa 3.
+
+## 🗄️ Tabla local (SQLite, fuera del ER original)
+
+Para la **persistencia local** (Prueba 2) se agrega una tabla **`configuracion`** → entidad `ConfiguracionApp` de **una sola fila** (`id = 1`): `sesionUsuarioId: Int?`, `temaOscuro: Boolean`. Es **configuración del dispositivo**, no va al backend.
+
+| Qué | Por qué | ¿Va al backend (etapa 3)? |
+|---|---|---|
+| Tabla `configuracion` | Config del dispositivo (sesión + tema) | No |
+| `usuario.password` | Ya listado como hueco | Sí |
+| `salidaPedagogica.observaciones` | Lo pide el mockup; Javier decide si lo agrega a la entidad o lo saca de la pantalla | Sí, si se agrega |
+
+**En SQLite se guardan:** `configuracion`, `usuario`, `rutaPatrimonial`, `paradaRuta`, `salidaPedagogica`, `asignacionGuia`, `eventoCultural`, `avisoNotificacion`. **NO** van a SQLite (catálogo): `templo`, `disponibilidadHoraria`, `galeriaMultimedia`.
