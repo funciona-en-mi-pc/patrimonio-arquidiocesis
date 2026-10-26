@@ -58,4 +58,9 @@ object DatosEjemplo {
         AvisoNotificacion(avisoId = 3, temploId = 3, tipoAviso = "GENERAL", mensaje = "El templo permanece cerrado los lunes.", fechaHora = "2026-10-23T12:00", sincronizado = true),
     )
 
+    suspend fun sembrar(db: AppDatabase) {
+        if (db.usuarioDao().contar() == 0) {
+            usuarios.forEach { db.usuarioDao().insertar(it) }
+        }
+    }
 }
