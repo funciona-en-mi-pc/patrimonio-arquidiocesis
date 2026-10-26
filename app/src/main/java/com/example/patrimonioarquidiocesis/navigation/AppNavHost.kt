@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.patrimonioarquidiocesis.view.LoginScreen
 import com.example.patrimonioarquidiocesis.view.components.BottomBar
 
 
@@ -37,7 +38,11 @@ fun AppNavHost(){
             startDestination = Rutas.LOGIN,
             modifier = Modifier.padding(innerPadding)
         ){
-            composable(Rutas.LOGIN){ PantallaVacia("Login") }
+            composable(Rutas.LOGIN){
+                LoginScreen(
+                    onLoginExitoso = {navController.navigate(Rutas.INICIO)},
+                    onIrRegistro = {navController.navigate(Rutas.REGISTRO)}
+                ) }
             composable(Rutas.REGISTRO){ PantallaVacia("Registro") }
             composable(Rutas.INICIO){ PantallaVacia("Inicio / Mapa") }
             composable(Rutas.TEMPLO){ PantallaVacia("Ficha de templo") }
