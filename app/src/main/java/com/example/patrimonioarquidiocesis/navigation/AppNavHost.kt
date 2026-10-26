@@ -15,11 +15,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.patrimonioarquidiocesis.view.InicioScreen
+import com.example.patrimonioarquidiocesis.view.LoginScreen
 import com.example.patrimonioarquidiocesis.view.components.BottomBar
-
+import com.example.patrimonioarquidiocesis.model.Constantes
+import com.example.patrimonioarquidiocesis.view.RegistroScreen
 
 @Composable
-fun AppNavHost(){
+fun AppNavHost(rutaInicial: String){
     val navController = rememberNavController()
     val rutasConBarra = listOf(Rutas.INICIO, Rutas.AGENDA, Rutas.ARMAR_RUTA, Rutas.PERFIL)
     val baskStarckEntry by navController.currentBackStackEntryAsState()
@@ -35,12 +37,31 @@ fun AppNavHost(){
         innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Rutas.INICIO,
+            startDestination = rutaInicial,
             modifier = Modifier.padding(innerPadding)
         ){
-            composable(Rutas.LOGIN){ PantallaVacia("Login") }
-            composable(Rutas.REGISTRO){ PantallaVacia("Registro") }
-            composable(Rutas.INICIO){ InicioScreen(navController) }
+            composable(Rutas.LOGIN){
+                LoginScreen(
+                    onLoginExitoso = { usuario ->
+                        val destino = if (usuario.rol == Constantes.ROL_ENCARGADO) Rutas.PANEL_ENCARGADO else Rutas.INICIO
+                        navController.navigate(destino) {
+                            popUpTo(Rutas.LOGIN) { inclusive = true }
+                        }
+                    },
+                    onIrRegistro = {navController.navigate(Rutas.REGISTRO)}
+                ) }
+
+            composable(Rutas.REGISTRO){
+                RegistroScreen(
+                    onRegistroExitoso = {
+                        navController.navigate(Rutas.INICIO) {
+                            popUpTo(Rutas.LOGIN) { inclusive = true }
+                        }
+                    },
+                    onIrLogin = { navController.popBackStack() }
+                ) }
+
+            composable(Rutas.INICIO){ PantallaVacia("Inicio / Mapa") }
             composable(Rutas.TEMPLO){ PantallaVacia("Ficha de templo") }
             composable(Rutas.HORARIOS){ PantallaVacia("Horarios") }
             composable(Rutas.AGENDA){ PantallaVacia("Agenda cultural") }
