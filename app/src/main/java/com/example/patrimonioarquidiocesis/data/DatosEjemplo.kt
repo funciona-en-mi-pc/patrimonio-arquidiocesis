@@ -18,14 +18,44 @@ object DatosEjemplo {
     )
 
     val horarios = listOf(
+        // Catedral de Santiago (temploId = 1)
         DisponibilidadHoraria(disponibilidadId = 1, temploId = 1, diaSemana = "LUNES", horaApertura = "09:00", horaCierre = "19:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
-        DisponibilidadHoraria(disponibilidadId = 2, temploId = 1, diaSemana = "SABADO", horaApertura = "10:00", horaCierre = "20:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
-        DisponibilidadHoraria(disponibilidadId = 3, temploId = 1, diaSemana = "DOMINGO", horaApertura = "-", horaCierre = "-", esExcepcional = false, estado = Constantes.ESTADO_CERRADO)
+        DisponibilidadHoraria(disponibilidadId = 2, temploId = 1, diaSemana = "MARTES", horaApertura = "09:00", horaCierre = "19:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
+        DisponibilidadHoraria(disponibilidadId = 3, temploId = 1, diaSemana = "MIERCOLES", horaApertura = "09:00", horaCierre = "19:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
+        DisponibilidadHoraria(disponibilidadId = 4, temploId = 1, diaSemana = "JUEVES", horaApertura = "09:00", horaCierre = "19:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
+        DisponibilidadHoraria(disponibilidadId = 5, temploId = 1, diaSemana = "VIERNES", horaApertura = "09:00", horaCierre = "19:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
+        DisponibilidadHoraria(disponibilidadId = 6, temploId = 1, diaSemana = "SABADO", horaApertura = "10:00", horaCierre = "20:00", esExcepcional = false, estado = Constantes.ESTADO_EN_CELEBRACION),
+        DisponibilidadHoraria(disponibilidadId = 7, temploId = 1, diaSemana = "DOMINGO", horaApertura = "-", horaCierre = "-", esExcepcional = false, estado = Constantes.ESTADO_CERRADO),
+        DisponibilidadHoraria(disponibilidadId = 8, temploId = 1, diaSemana = "DOMINGO", horaApertura = "11:00", horaCierre = "13:00", esExcepcional = true, estado = Constantes.ESTADO_ABIERTO),
+        // Basílica del Carmen (temploId = 2)
+        DisponibilidadHoraria(disponibilidadId = 9, temploId = 2, diaSemana = "LUNES", horaApertura = "08:00", horaCierre = "18:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
+        DisponibilidadHoraria(disponibilidadId = 10, temploId = 2, diaSemana = "MARTES", horaApertura = "08:00", horaCierre = "18:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
+        DisponibilidadHoraria(disponibilidadId = 11, temploId = 2, diaSemana = "MIERCOLES", horaApertura = "08:00", horaCierre = "18:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
+        DisponibilidadHoraria(disponibilidadId = 12, temploId = 2, diaSemana = "JUEVES", horaApertura = "08:00", horaCierre = "18:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
+        DisponibilidadHoraria(disponibilidadId = 13, temploId = 2, diaSemana = "VIERNES", horaApertura = "08:00", horaCierre = "18:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
+        DisponibilidadHoraria(disponibilidadId = 14, temploId = 2, diaSemana = "SABADO", horaApertura = "08:00", horaCierre = "18:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
+        DisponibilidadHoraria(disponibilidadId = 15, temploId = 2, diaSemana = "DOMINGO", horaApertura = "08:00", horaCierre = "14:00", esExcepcional = false, estado = Constantes.ESTADO_EN_CELEBRACION),
+        // Iglesia San Francisco (temploId = 3)
+        DisponibilidadHoraria(disponibilidadId = 16, temploId = 3, diaSemana = "LUNES", horaApertura = "-", horaCierre = "-", esExcepcional = false, estado = Constantes.ESTADO_CERRADO),
+        DisponibilidadHoraria(disponibilidadId = 17, temploId = 3, diaSemana = "MARTES", horaApertura = "10:00", horaCierre = "18:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
+        DisponibilidadHoraria(disponibilidadId = 18, temploId = 3, diaSemana = "MIERCOLES", horaApertura = "10:00", horaCierre = "18:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
+        DisponibilidadHoraria(disponibilidadId = 19, temploId = 3, diaSemana = "JUEVES", horaApertura = "10:00", horaCierre = "18:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
+        DisponibilidadHoraria(disponibilidadId = 20, temploId = 3, diaSemana = "VIERNES", horaApertura = "10:00", horaCierre = "18:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
+        DisponibilidadHoraria(disponibilidadId = 21, temploId = 3, diaSemana = "SABADO", horaApertura = "10:00", horaCierre = "18:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
+        DisponibilidadHoraria(disponibilidadId = 22, temploId = 3, diaSemana = "DOMINGO", horaApertura = "10:00", horaCierre = "18:00", esExcepcional = false, estado = Constantes.ESTADO_ABIERTO),
     )
 
     val eventos = listOf(
-        EventoCultural(eventoId = 1, temploId = 1, nombreEvento = "Misa solemne patronal", tipoEvento = "LITURGICO", fechaHora = "2026-10-25T18:00", descripcion = "Celebración patronal en la Catedral."),
-        EventoCultural(eventoId = 2, temploId = 3, nombreEvento = "Concierto de música sacra", tipoEvento = "CONCIERTO", fechaHora = "2026-10-28T20:00", descripcion = "Coro y órgano en San Francisco."),
-        EventoCultural(eventoId = 3, temploId = 2, nombreEvento = "Exposición de arte colonial", tipoEvento = "EXPOSICION", fechaHora = "2026-11-02T10:00", descripcion = "Muestra de pintura colonial.")
+        EventoCultural(eventoId = 1, temploId = 1, nombreEvento = "Misa solemne patronal", tipoEvento = Constantes.EVENTO_LITURGICO, fechaHora = "2026-10-25T18:00", descripcion = "Celebración patronal en la Catedral."),
+        EventoCultural(eventoId = 2, temploId = 3, nombreEvento = "Concierto de música sacra", tipoEvento = Constantes.EVENTO_CONCIERTO, fechaHora = "2026-10-28T20:00", descripcion = "Coro y órgano en San Francisco."),
+        EventoCultural(eventoId = 3, temploId = 2, nombreEvento = "Exposición de arte colonial", tipoEvento = Constantes.EVENTO_EXPOSICION, fechaHora = "2026-11-02T10:00", descripcion = "Muestra de pintura colonial.")
     )
+
+
+    val avisos = listOf(
+        AvisoNotificacion(avisoId = 1, temploId = 1, tipoAviso = "GENERAL", mensaje = "Apertura especial este domingo de 11:00 a 13:00.", fechaHora = "2026-10-25T09:00", sincronizado = true),
+        AvisoNotificacion(avisoId = 2, temploId = 2, tipoAviso = "GENERAL", mensaje = "Misa dominical a las 12:00, se pide silencio durante la celebración.", fechaHora = "2026-10-24T18:00", sincronizado = true),
+        AvisoNotificacion(avisoId = 3, temploId = 3, tipoAviso = "GENERAL", mensaje = "El templo permanece cerrado los lunes.", fechaHora = "2026-10-23T12:00", sincronizado = true),
+    )
+
 }
