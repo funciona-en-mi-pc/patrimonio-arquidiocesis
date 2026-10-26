@@ -61,7 +61,7 @@ fun AppNavHost(rutaInicial: String){
                     onIrLogin = { navController.popBackStack() }
                 ) }
 
-            composable(Rutas.INICIO){ PantallaVacia("Inicio / Mapa") }
+            composable(Rutas.INICIO){ InicioScreen(navController) }
             composable(Rutas.TEMPLO){ PantallaVacia("Ficha de templo") }
             composable(Rutas.HORARIOS){ PantallaVacia("Horarios") }
             composable(Rutas.AGENDA){ PantallaVacia("Agenda cultural") }
