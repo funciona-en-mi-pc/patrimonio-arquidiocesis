@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.patrimonioarquidiocesis.view.InicioScreen
 import com.example.patrimonioarquidiocesis.view.LoginScreen
 import com.example.patrimonioarquidiocesis.view.components.BottomBar
 import com.example.patrimonioarquidiocesis.model.Constantes
@@ -60,7 +61,7 @@ fun AppNavHost(rutaInicial: String){
                     onIrLogin = { navController.popBackStack() }
                 ) }
 
-            composable(Rutas.INICIO){ PantallaVacia("Inicio / Mapa") }
+            composable(Rutas.INICIO){ InicioScreen(navController) }
             composable(Rutas.TEMPLO){ PantallaVacia("Ficha de templo") }
             composable(Rutas.HORARIOS){ PantallaVacia("Horarios") }
             composable(Rutas.AGENDA){ PantallaVacia("Agenda cultural") }
