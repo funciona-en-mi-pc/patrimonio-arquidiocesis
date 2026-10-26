@@ -1,57 +1,63 @@
 package com.example.patrimonioarquidiocesis.viewmodel
 
-import androidx.compose.runtime.getValue //Por el By recuerda el set
-import androidx.compose.runtime.mutableStateOf //MutableStateOf
-import androidx.compose.runtime.setValue //Por el By recuerda el get
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.patrimonioarquidiocesis.data.AppDatabase
+import com.example.patrimonioarquidiocesis.data.RepositorioUsuarios
+import com.example.patrimonioarquidiocesis.model.Constantes
 import com.example.patrimonioarquidiocesis.model.Usuario
+import kotlinx.coroutines.launch
 
+class RegistroViewModel(application: Application) : AndroidViewModel(application) {
 
+    private val db = AppDatabase.obtener(application)
+    private val repositorio = RepositorioUsuarios(db.usuarioDao(), db.configuracionDao())
 
-class RegistroViewModel : ViewModel() {
-
-    //ESTADO DE LA PANTALLA
     var nombre by mutableStateOf("")
         private set
-
     var mail by mutableStateOf("")
         private set
-
     var pass by mutableStateOf("")
         private set
-
-    var tipoParticipacion by mutableStateOf("Turista")
+    var tipoParticipacion by mutableStateOf(Constantes.ROL_TURISTA)   // se guarda la constante, no el texto
         private set
-
+    var institucion by mutableStateOf("")
+        private set
     var mensaje by mutableStateOf("")
         private set
 
-    fun cambiarNombre(nuevoNombre: String){
-        nombre = nuevoNombre
-    }
+    fun cambiarNombre(nuevo: String) { nombre = nuevo }
+    fun cambiarMail(nuevo: String) { mail = nuevo }
+    fun cambiarPass(nuevo: String) { pass = nuevo }
+    fun cambiarTipoParticipacion(nuevo: String) { tipoParticipacion = nuevo }
+    fun cambiarInstitucion(nuevo: String) { institucion = nuevo }
 
-    fun cambiarMail(nuevoMail: String){
-        mail = nuevoMail
-    }
-
-    fun cambiarPass(nuevoPass: String){
-        pass = nuevoPass
-    }
-
-    fun cambiarTipoParticipacion (nuevoTipoParticipacion: String){
-        tipoParticipacion = nuevoTipoParticipacion
-    }
-
-
-    fun crearCuenta(){
-        if (nombre.isBlank() || mail.isBlank() || pass.isBlank()){
-            mensaje = "Por favor completar todos los campos"
-        } else if (!mail.contains("@")){
-            mensaje = "El correo no es valido"
-        }else{
-            val nuevoUsuario = Usuario(0,nombre, mail, pass, tipoParticipacion)
-            mensaje = "Cuenta creada para ${nuevoUsuario.nombre}"
+    fun crearCuenta(onExito: (Usuario) -> Unit) {
+        if (nombre.isBlank() || mail.isBlank() || pass.isBlank()) {
+            mensaje = "Por favor completa todos los campos"
+            return
+        }
+        if (!mail.contains("@")) {
+            mensaje = "El correo no es válido"
+            return
+        }
+        if (tipoParticipacion == Constantes.ROL_COLEGIO && institucion.isBlank()) {
+            mensaje = "Indica el nombre de la institución"
+            return
+        }
+        viewModelScope.launch {
+            val usuario =
+                repositorio.registrarUsuario(nombre, mail, pass, tipoParticipacion, institucion)
+            if (usuario != null) {
+                mensaje = ""
+                onExito(usuario)
+            } else {
+                mensaje = "Ese correo ya está registrado"
+            }
         }
     }
-
 }
