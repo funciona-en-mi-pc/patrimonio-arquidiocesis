@@ -4,13 +4,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.patrimonioarquidiocesis.navigation.AppNavHost
 import com.example.patrimonioarquidiocesis.ui.theme.PatrimonioArquidiocesisTheme
-import com.example.patrimonioarquidiocesis.view.CrearCuentaScreen
+import com.example.patrimonioarquidiocesis.view.components.Cargando
+import com.example.patrimonioarquidiocesis.viewmodel.MainViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,31 +18,15 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             PatrimonioArquidiocesisTheme {
-            AppNavHost()
-            //CrearCuentaScreen()
-                /*Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }*/
+                val mainViewModel: MainViewModel = viewModel()
+                val rutaInicial by mainViewModel.rutaInicial.collectAsState()
+
+                if (rutaInicial == null) {
+                    Cargando()
+                } else {
+                    AppNavHost(rutaInicial!!)
+                }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    PatrimonioArquidiocesisTheme {
-        Greeting("Android")
     }
 }

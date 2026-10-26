@@ -19,7 +19,7 @@ import com.example.patrimonioarquidiocesis.view.components.BottomBar
 
 
 @Composable
-fun AppNavHost(){
+fun AppNavHost(rutaInicial: String){
     val navController = rememberNavController()
     val rutasConBarra = listOf(Rutas.INICIO, Rutas.AGENDA, Rutas.ARMAR_RUTA, Rutas.PERFIL)
     val baskStarckEntry by navController.currentBackStackEntryAsState()
@@ -35,7 +35,7 @@ fun AppNavHost(){
         innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Rutas.LOGIN,
+            startDestination = rutaInicial,
             modifier = Modifier.padding(innerPadding)
         ){
             composable(Rutas.LOGIN){
