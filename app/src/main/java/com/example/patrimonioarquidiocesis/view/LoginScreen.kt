@@ -49,11 +49,7 @@ fun LoginScreen(
         )
 
         Button(
-            onClick = {
-                if (loginViewModel.iniciarSesion()){
-                    onLoginExitoso()
-                }
-            },
+            onClick = { loginViewModel.iniciarSesion { onLoginExitoso() } },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = "Iniciar Sesion")

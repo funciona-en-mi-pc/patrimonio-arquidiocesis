@@ -1,12 +1,20 @@
 package com.example.patrimonioarquidiocesis.viewmodel
 
+import android.app.Application
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.patrimonioarquidiocesis.data.AppDatabase
 import com.example.patrimonioarquidiocesis.data.RepositorioUsuarios
+import com.example.patrimonioarquidiocesis.model.Usuario
+import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel(){
+class LoginViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val db = AppDatabase.obtener(application)
+    private val repositorio = RepositorioUsuarios(db.usuarioDao(), db.configuracionDao())
 
     var email by mutableStateOf("")
         private set
@@ -17,23 +25,23 @@ class LoginViewModel : ViewModel(){
     var mensaje by mutableStateOf("")
         private set
 
-    fun cambiarEmail(nuevo : String){ email = nuevo}
-    fun cambiarPassword(nuevo: String) {password = nuevo}
+    fun cambiarEmail(nuevo: String) { email = nuevo }
+    fun cambiarPassword(nuevo: String) { password = nuevo }
 
-    //Devuelve true si entro bien, si no, deja un mensaje de error
-
-    fun iniciarSesion(): Boolean{
-        if(email.isBlank() || password.isBlank()){
+    // Si el login es correcto llama a onExito con el usuario; si no, deja un mensaje de error
+    fun iniciarSesion(onExito: (Usuario) -> Unit) {
+        if (email.isBlank() || password.isBlank()) {
             mensaje = "Complete correo y contraseña"
-            return false
+            return
         }
-        val usuario = RepositorioUsuarios.iniciarSesion(email, password)
-        return if (usuario != null){
-            mensaje = ""
-            true
-        }else{
-            mensaje = "correo o contraseña incorrectos"
-            false
+        viewModelScope.launch {
+            val usuario = repositorio.iniciarSesion(email, password)
+            if (usuario != null) {
+                mensaje = ""
+                onExito(usuario)
+            } else {
+                mensaje = "Correo o contraseña incorrectos"
+            }
         }
     }
 }
