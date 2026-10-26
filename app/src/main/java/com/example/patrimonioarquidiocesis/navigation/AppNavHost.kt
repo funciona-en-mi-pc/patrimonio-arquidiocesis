@@ -10,14 +10,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.patrimonioarquidiocesis.view.InicioScreen
 import com.example.patrimonioarquidiocesis.view.LoginScreen
 import com.example.patrimonioarquidiocesis.view.components.BottomBar
 import com.example.patrimonioarquidiocesis.model.Constantes
+import com.example.patrimonioarquidiocesis.view.FichaTemploScreen
 import com.example.patrimonioarquidiocesis.view.RegistroScreen
 
 @Composable
@@ -62,7 +65,13 @@ fun AppNavHost(rutaInicial: String){
                 ) }
 
             composable(Rutas.INICIO){ InicioScreen(navController) }
-            composable(Rutas.TEMPLO){ PantallaVacia("Ficha de templo") }
+            composable(
+                route = Rutas.TEMPLO,
+                arguments = listOf(navArgument("temploId") { type = NavType.IntType })
+            ) { backStackEntry ->
+                val temploId = backStackEntry.arguments?.getInt("temploId") ?: 0
+                FichaTemploScreen(navController, temploId)
+            }
             composable(Rutas.HORARIOS){ PantallaVacia("Horarios") }
             composable(Rutas.AGENDA){ PantallaVacia("Agenda cultural") }
             composable(Rutas.NOTIFICACIONES){ PantallaVacia("Notificaciones") }
