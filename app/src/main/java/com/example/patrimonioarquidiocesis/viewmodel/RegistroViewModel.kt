@@ -49,8 +49,8 @@ class RegistroViewModel : ViewModel() {
         } else if (!mail.contains("@")){
             mensaje = "El correo no es valido"
         }else{
-            val nuevoUsuario = Usuario(nombre, mail, pass, tipoParticipacion)
-            mensaje = "Cuenta creada para ${nuevoUsuario}"
+            val nuevoUsuario = Usuario(0,nombre, mail, pass, tipoParticipacion)
+            mensaje = "Cuenta creada para ${nuevoUsuario.nombre}"
         }
     }
 
