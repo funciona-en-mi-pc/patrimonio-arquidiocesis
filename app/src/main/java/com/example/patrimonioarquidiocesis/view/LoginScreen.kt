@@ -16,10 +16,10 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.patrimonioarquidiocesis.viewmodel.LoginViewModel
-
+import com.example.patrimonioarquidiocesis.model.Usuario
 @Composable
 fun LoginScreen(
-    onLoginExitoso: () -> Unit,
+    onLoginExitoso: (Usuario) -> Unit,
     onIrRegistro: () -> Unit,
     loginViewModel: LoginViewModel = viewModel()
 ){
@@ -49,7 +49,7 @@ fun LoginScreen(
         )
 
         Button(
-            onClick = { loginViewModel.iniciarSesion { onLoginExitoso() } },
+            onClick = { loginViewModel.iniciarSesion(onLoginExitoso) },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(text = "Iniciar Sesion")
