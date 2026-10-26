@@ -17,6 +17,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.patrimonioarquidiocesis.view.LoginScreen
 import com.example.patrimonioarquidiocesis.view.components.BottomBar
 import com.example.patrimonioarquidiocesis.model.Constantes
+import com.example.patrimonioarquidiocesis.view.RegistroScreen
+
 @Composable
 fun AppNavHost(rutaInicial: String){
     val navController = rememberNavController()
@@ -47,7 +49,17 @@ fun AppNavHost(rutaInicial: String){
                     },
                     onIrRegistro = {navController.navigate(Rutas.REGISTRO)}
                 ) }
-            composable(Rutas.REGISTRO){ PantallaVacia("Registro") }
+
+            composable(Rutas.REGISTRO){
+                RegistroScreen(
+                    onRegistroExitoso = {
+                        navController.navigate(Rutas.INICIO) {
+                            popUpTo(Rutas.LOGIN) { inclusive = true }
+                        }
+                    },
+                    onIrLogin = { navController.popBackStack() }
+                ) }
+
             composable(Rutas.INICIO){ PantallaVacia("Inicio / Mapa") }
             composable(Rutas.TEMPLO){ PantallaVacia("Ficha de templo") }
             composable(Rutas.HORARIOS){ PantallaVacia("Horarios") }

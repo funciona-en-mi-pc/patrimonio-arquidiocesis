@@ -2,6 +2,7 @@ package com.example.patrimonioarquidiocesis.data
 
 import com.example.patrimonioarquidiocesis.dao.ConfiguracionDao
 import com.example.patrimonioarquidiocesis.dao.UsuarioDao
+import com.example.patrimonioarquidiocesis.model.Constantes
 import com.example.patrimonioarquidiocesis.model.Usuario
 
 class RepositorioUsuarios(
@@ -25,5 +26,16 @@ class RepositorioUsuarios(
 
     suspend fun cerrarSesion() {
         configuracion.borrarSesion()
+    }
+
+    suspend fun registrarUsuario(nombre: String, email: String, password: String, rol: String, institucion: String): Usuario? {
+        val emailLimpio = email.trim().lowercase()
+        if (rol == Constantes.ROL_ENCARGADO) return null
+        if (usuarioDao.buscarPorEmail(emailLimpio) != null) return null
+
+        val nuevo = Usuario(nombre = nombre.trim(), email = emailLimpio, password = password, rol = rol, institucion = institucion)
+        val id = usuarioDao.insertar(nuevo).toInt()
+        configuracion.guardarSesion(id)
+        return nuevo.copy(usuarioId = id)
     }
 }
