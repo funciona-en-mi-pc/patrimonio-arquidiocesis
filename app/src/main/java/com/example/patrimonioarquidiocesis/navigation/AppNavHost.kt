@@ -21,6 +21,7 @@ import com.example.patrimonioarquidiocesis.view.LoginScreen
 import com.example.patrimonioarquidiocesis.view.components.BottomBar
 import com.example.patrimonioarquidiocesis.model.Constantes
 import com.example.patrimonioarquidiocesis.view.FichaTemploScreen
+import com.example.patrimonioarquidiocesis.view.HorariosScreen
 import com.example.patrimonioarquidiocesis.view.RegistroScreen
 
 @Composable
@@ -72,7 +73,13 @@ fun AppNavHost(rutaInicial: String){
                 val temploId = backStackEntry.arguments?.getInt("temploId") ?: 0
                 FichaTemploScreen(navController, temploId)
             }
-            composable(Rutas.HORARIOS){ PantallaVacia("Horarios") }
+            composable(
+                route = Rutas.HORARIOS,
+                arguments = listOf(navArgument("temploId") { type = NavType.IntType })
+            ) { backStackEntry ->
+                val temploId = backStackEntry.arguments?.getInt("temploId") ?: 0
+                HorariosScreen(navController, temploId)
+            }
             composable(Rutas.AGENDA){ PantallaVacia("Agenda cultural") }
             composable(Rutas.NOTIFICACIONES){ PantallaVacia("Notificaciones") }
             composable(Rutas.PERFIL){ PantallaVacia("Perfil") }
