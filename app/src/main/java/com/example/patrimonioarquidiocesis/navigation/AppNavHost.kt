@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.patrimonioarquidiocesis.view.InicioScreen
 import com.example.patrimonioarquidiocesis.view.components.BottomBar
 
 
@@ -34,12 +35,12 @@ fun AppNavHost(){
         innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = Rutas.LOGIN,
+            startDestination = Rutas.INICIO,
             modifier = Modifier.padding(innerPadding)
         ){
             composable(Rutas.LOGIN){ PantallaVacia("Login") }
             composable(Rutas.REGISTRO){ PantallaVacia("Registro") }
-            composable(Rutas.INICIO){ PantallaVacia("Inicio / Mapa") }
+            composable(Rutas.INICIO){ InicioScreen(navController) }
             composable(Rutas.TEMPLO){ PantallaVacia("Ficha de templo") }
             composable(Rutas.HORARIOS){ PantallaVacia("Horarios") }
             composable(Rutas.AGENDA){ PantallaVacia("Agenda cultural") }
