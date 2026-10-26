@@ -11,5 +11,10 @@ object Constantes{
     const val ESTADO_ABIERTO = "ABIERTO"
     const val ESTADO_CERRADO = "CERRADO"
     const val ESTADO_EN_CELEBRACION = "EN_CELEBRACION"
+
+    const val EVENTO_LITURGICO = "LITURGICO"
+    const val EVENTO_CONCIERTO = "CONCIERTO"
+    const val EVENTO_EXPOSICION = "EXPOSICION"
+
 }
 
