@@ -8,7 +8,7 @@ import java.time.LocalDate
 
 object RepositorioTemplos {
 
-    suspend fun  listrTemplos(): List<Templo>{
+    suspend fun  listarTemplos(): List<Templo>{
         delay(1000)
         return DatosEjemplo.templos
     }
