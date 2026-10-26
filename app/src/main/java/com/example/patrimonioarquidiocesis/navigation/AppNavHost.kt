@@ -16,8 +16,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.patrimonioarquidiocesis.view.LoginScreen
 import com.example.patrimonioarquidiocesis.view.components.BottomBar
-
-
+import com.example.patrimonioarquidiocesis.model.Constantes
 @Composable
 fun AppNavHost(rutaInicial: String){
     val navController = rememberNavController()
@@ -40,7 +39,12 @@ fun AppNavHost(rutaInicial: String){
         ){
             composable(Rutas.LOGIN){
                 LoginScreen(
-                    onLoginExitoso = {navController.navigate(Rutas.INICIO)},
+                    onLoginExitoso = { usuario ->
+                        val destino = if (usuario.rol == Constantes.ROL_ENCARGADO) Rutas.PANEL_ENCARGADO else Rutas.INICIO
+                        navController.navigate(destino) {
+                            popUpTo(Rutas.LOGIN) { inclusive = true }
+                        }
+                    },
                     onIrRegistro = {navController.navigate(Rutas.REGISTRO)}
                 ) }
             composable(Rutas.REGISTRO){ PantallaVacia("Registro") }
