@@ -27,6 +27,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
+import com.example.patrimonioarquidiocesis.ui.theme.DoradoProfundo
 import com.example.patrimonioarquidiocesis.ui.theme.Terracota
 import com.example.patrimonioarquidiocesis.ui.theme.TintaSuave
 import com.example.patrimonioarquidiocesis.view.components.Cargando
@@ -113,7 +114,10 @@ fun SalidaPedagogicaScreen(
                 )
 
                 if (salidaViewModel.mensaje.isNotEmpty()) {
-                    Text(text = salidaViewModel.mensaje, color = Terracota)
+                    Text(
+                        text = salidaViewModel.mensaje,
+                        color = if (salidaViewModel.enviada) DoradoProfundo else Terracota
+                    )
                 }
 
                 Button(

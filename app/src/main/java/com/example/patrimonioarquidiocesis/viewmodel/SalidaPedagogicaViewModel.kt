@@ -41,6 +41,9 @@ class SalidaPedagogicaViewModel(application: Application) : AndroidViewModel(app
         private set
     var mensaje by mutableStateOf("")
         private set
+    // true = el mensaje es de éxito (se muestra en dorado); false = es un error
+    var enviada by mutableStateOf(false)
+        private set
 
     init {
         viewModelScope.launch {
@@ -63,6 +66,7 @@ class SalidaPedagogicaViewModel(application: Application) : AndroidViewModel(app
 
     fun enviar() {
         val colegio = _usuario.value ?: return
+        enviada = false
         val estudiantes = cantidad.toIntOrNull()
 
         if (rutaId == 0) {
@@ -83,6 +87,7 @@ class SalidaPedagogicaViewModel(application: Application) : AndroidViewModel(app
             cantidad = ""
             observaciones = ""
             mensaje = "Solicitud enviada"
+            enviada = true
         }
     }
 }

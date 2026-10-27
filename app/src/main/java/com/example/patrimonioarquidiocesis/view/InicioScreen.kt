@@ -34,6 +34,7 @@ import androidx.navigation.NavController
 import com.example.patrimonioarquidiocesis.model.Constantes
 import com.example.patrimonioarquidiocesis.navigation.Rutas
 import com.example.patrimonioarquidiocesis.ui.theme.PiedraOscura
+import com.example.patrimonioarquidiocesis.ui.theme.Tinta
 import com.example.patrimonioarquidiocesis.view.components.TemploCard
 import com.example.patrimonioarquidiocesis.viewmodel.InicioViewModel
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
@@ -83,7 +84,8 @@ fun InicioScreen(
                     .background(PiedraOscura, RoundedCornerShape(16.dp)),
                 contentAlignment = Alignment.Center
             ) {
-                Text(text = "Mapa interactivo")
+                // El fondo siempre es claro, así que el texto va oscuro también en tema oscuro
+                Text(text = "Mapa interactivo", color = Tinta)
             }
 
             // QR: cada templo tiene un QR con su temploId; al leerlo se abre su Ficha
