@@ -79,8 +79,10 @@ class RepositorioRutas(
     }
 
     // shortcut: tiempos fijos por visita y traslado; en la etapa 3 se pueden calcular con latitud/longitud
+    // Cada templo es una visita, y entre dos templos hay un traslado (la primera parada no tiene)
     fun calcularMinutos(paradas: List<ParadaRuta>): Int {
-        return paradas.size * Constantes.MINUTOS_VISITA + paradas.sumOf { it.tiempoEstimadoTraslado }.toInt()
+        if (paradas.isEmpty()) return 0
+        return paradas.size * Constantes.MINUTOS_VISITA + (paradas.size - 1) * Constantes.MINUTOS_TRASLADO
     }
 
     // ---- Salida pedagógica ----

@@ -24,6 +24,10 @@ class RepositorioUsuarios(
         return usuarioDao.buscarPorId(id)
     }
 
+    suspend fun obtenerUsuario(usuarioId: Int): Usuario? {
+        return usuarioDao.buscarPorId(usuarioId)
+    }
+
     suspend fun cerrarSesion() {
         configuracion.borrarSesion()
     }
