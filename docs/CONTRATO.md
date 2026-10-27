@@ -41,7 +41,7 @@ Entidades: `usuario`, `templo`, `disponibilidadHoraria`, `avisoNotificacion`, `e
 
 **Entidades en SQLite** (ver §3) llevan `@Entity` y `@PrimaryKey(autoGenerate = true)`, salvo `ConfiguracionApp` (id fijo = 1). `templo` y `disponibilidadHoraria` quedan como `data class` normales (catálogo). **Una entidad por archivo** en `model/`. Entidad nueva: `ConfiguracionApp`.
 
-**Huecos (ver `MODELO-ER.md`):** `password` en `usuario` (va al backend en etapa 3), `salidaPedagogica.observaciones` (si se agrega). La tabla `configuracion` es local del dispositivo (no va al backend).
+**Huecos (ver `MODELO-ER.md`):** `password` en `usuario` (va al backend en etapa 3), `salidaPedagogica.observaciones` (agregado: lo pide el mockup). La tabla `configuracion` es local del dispositivo (no va al backend).
 
 ---
 
@@ -89,7 +89,7 @@ suspend quitarParada(paradaId)                                    // D
 suspend obtenerRuta(rutaId): RutaPatrimonial?
 paradasDe(rutaId): Flow<List<ParadaRuta>>
 suspend confirmarRuta(rutaId)                                     // U: pasa a CONFIRMADA
-suspend crearSalidaPedagogica(colegioId, rutaId, fecha, cantidadEstudiantes /*, observaciones si se agrega */)
+suspend crearSalidaPedagogica(colegioId, rutaId, fecha, cantidadEstudiantes, observaciones)
 🔗 asignacionesDe(guiaId): Flow<List<AsignacionGuia>>
 suspend responderAsignacion(asignacionId, aceptar: Boolean)       // U: CONFIRMADA / RECHAZADA
 ```
