@@ -112,7 +112,11 @@ fun FichaTemploScreen(
                 Spacer(modifier = Modifier.weight(1f))
 
                 Button(
-                    onClick = { /* Pendiente: se conecta con RepositorioRutas de Javier */ },
+                    onClick = {
+                        fichaViewModel.agregarAMiRuta(datos.temploId) {
+                            navController.navigate(Rutas.ARMAR_RUTA)
+                        }
+                    },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(text = "Agregar a mi ruta")
