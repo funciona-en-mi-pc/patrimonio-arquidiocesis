@@ -33,14 +33,19 @@ class MisAsignacionesViewModel(application: Application) : AndroidViewModel(appl
         viewModelScope.launch {
             val guia = repoUsuarios.usuarioActual() ?: return@launch
 
+            // Si una ruta tiene varias salidas, queda la última (se van sobrescribiendo)
+            val estudiantes = mutableMapOf<Int, Int>()
+            for (salida in repoRutas.leerSalidas()) {
+                estudiantes[salida.rutaId] = salida.cantidadEstudiantes
+            }
+
             val nombres = mutableMapOf<Int, String>()
             val detalles = mutableMapOf<Int, String>()
             for (ruta in repoRutas.leerTodasLasRutas()) {
                 nombres[ruta.rutaId] = ruta.nombreRuta
-                detalles[ruta.rutaId] = repoUsuarios.obtenerUsuario(ruta.usuarioCreadorId)?.nombre ?: ""
-            }
-            for (salida in repoRutas.leerSalidas()) {
-                detalles[salida.rutaId] = "${detalles[salida.rutaId]} · ${salida.cantidadEstudiantes} estudiantes"
+                val creador = repoUsuarios.obtenerUsuario(ruta.usuarioCreadorId)?.nombre ?: ""
+                val cantidad = estudiantes[ruta.rutaId]
+                detalles[ruta.rutaId] = if (cantidad == null) creador else "$creador · $cantidad estudiantes"
             }
             _nombresRutas.value = nombres
             _detalles.value = detalles
