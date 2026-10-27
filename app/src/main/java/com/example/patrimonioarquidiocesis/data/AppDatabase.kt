@@ -6,16 +6,27 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.patrimonioarquidiocesis.model.EventoCultural
 import com.example.patrimonioarquidiocesis.model.AvisoNotificacion
+import com.example.patrimonioarquidiocesis.dao.AsignacionDao
 import com.example.patrimonioarquidiocesis.dao.AvisoDao
 import com.example.patrimonioarquidiocesis.dao.ConfiguracionDao
 import com.example.patrimonioarquidiocesis.dao.EventoDao
+import com.example.patrimonioarquidiocesis.dao.ParadaDao
+import com.example.patrimonioarquidiocesis.dao.RutaDao
+import com.example.patrimonioarquidiocesis.dao.SalidaDao
 import com.example.patrimonioarquidiocesis.dao.UsuarioDao
+import com.example.patrimonioarquidiocesis.model.AsignacionGuia
 import com.example.patrimonioarquidiocesis.model.ConfiguracionApp
+import com.example.patrimonioarquidiocesis.model.ParadaRuta
+import com.example.patrimonioarquidiocesis.model.RutaPatrimonial
+import com.example.patrimonioarquidiocesis.model.SalidaPedagogica
 import com.example.patrimonioarquidiocesis.model.Usuario
 
 @Database(
-    entities = [ConfiguracionApp::class, Usuario::class, EventoCultural::class, AvisoNotificacion::class],
-    version = 2
+    entities = [
+        ConfiguracionApp::class, Usuario::class, EventoCultural::class, AvisoNotificacion::class,
+        RutaPatrimonial::class, ParadaRuta::class, SalidaPedagogica::class, AsignacionGuia::class
+    ],
+    version = 3
 )
 abstract class AppDatabase : RoomDatabase() {
 
@@ -25,6 +36,11 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun eventoDao(): EventoDao
 
     abstract fun avisoDao(): AvisoDao
+
+    abstract fun rutaDao(): RutaDao
+    abstract fun paradaDao(): ParadaDao
+    abstract fun salidaDao(): SalidaDao
+    abstract fun asignacionDao(): AsignacionDao
 
     companion object {
         @Volatile

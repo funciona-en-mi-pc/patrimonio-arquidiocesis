@@ -139,6 +139,6 @@ Para la **persistencia local** (Prueba 2) se agrega una tabla **`configuracion`*
 |---|---|---|
 | Tabla `configuracion` | Config del dispositivo (sesión + tema) | No |
 | `usuario.password` | Ya listado como hueco | Sí |
-| `salidaPedagogica.observaciones` | Lo pide el mockup; Javier decide si lo agrega a la entidad o lo saca de la pantalla | Sí, si se agrega |
+| `salidaPedagogica.observaciones` | Lo pide el mockup: **se agregó** a la entidad (`String`, vacío por defecto) | Sí (ya está en el backend) |
 
 **En SQLite se guardan:** `configuracion`, `usuario`, `rutaPatrimonial`, `paradaRuta`, `salidaPedagogica`, `asignacionGuia`, `eventoCultural`, `avisoNotificacion`. **NO** van a SQLite (catálogo): `templo`, `disponibilidadHoraria`, `galeriaMultimedia`.

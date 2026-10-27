@@ -58,6 +58,28 @@ object DatosEjemplo {
         AvisoNotificacion(avisoId = 3, temploId = 3, tipoAviso = "GENERAL", mensaje = "El templo permanece cerrado los lunes.", fechaHora = "2026-10-23T12:00", sincronizado = true),
     )
 
+    // Ruta 1: la armó el colegio y Carlos aún no responde. Ruta 2: la armó María y Carlos ya confirmó.
+    val rutas = listOf(
+        RutaPatrimonial(rutaId = 1, usuarioCreadorId = 2, nombreRuta = "Ruta Centro Histórico", tiempoEstimadoTotal = 38.0, estado = Constantes.RUTA_CONFIRMADA),
+        RutaPatrimonial(rutaId = 2, usuarioCreadorId = 1, nombreRuta = "Ruta Basílicas del Sur", tiempoEstimadoTotal = 38.0, estado = Constantes.RUTA_CONFIRMADA)
+    )
+
+    val paradas = listOf(
+        ParadaRuta(paradaId = 1, rutaId = 1, temploId = 1, orden = 1, tiempoEstimadoTraslado = 0.0),
+        ParadaRuta(paradaId = 2, rutaId = 1, temploId = 3, orden = 2, tiempoEstimadoTraslado = 12.0),
+        ParadaRuta(paradaId = 3, rutaId = 2, temploId = 1, orden = 1, tiempoEstimadoTraslado = 0.0),
+        ParadaRuta(paradaId = 4, rutaId = 2, temploId = 2, orden = 2, tiempoEstimadoTraslado = 12.0)
+    )
+
+    val salidas = listOf(
+        SalidaPedagogica(salidaId = 1, colegioId = 2, rutaId = 1, fechaSalida = "2026-11-12", cantidadEstudiantes = 32, observaciones = "Solicitamos guía con enfoque histórico.")
+    )
+
+    val asignaciones = listOf(
+        AsignacionGuia(asignacionId = 1, rutaId = 1, guiaId = 3, fechaAsignacion = "2026-11-12T10:00", estadoAsignacion = Constantes.ASIGNACION_PENDIENTE),
+        AsignacionGuia(asignacionId = 2, rutaId = 2, guiaId = 3, fechaAsignacion = "2026-11-21T11:00", estadoAsignacion = Constantes.ASIGNACION_CONFIRMADA)
+    )
+
     suspend fun sembrar(db: AppDatabase) {
         if (db.usuarioDao().contar() == 0) {
             usuarios.forEach { db.usuarioDao().insertar(it) }
@@ -67,6 +89,12 @@ object DatosEjemplo {
         }
         if (db.avisoDao().contar() == 0) {
             avisos.forEach { db.avisoDao().insertar(it) }
+        }
+        if (db.rutaDao().contar() == 0) {
+            rutas.forEach { db.rutaDao().insertar(it) }
+            paradas.forEach { db.paradaDao().insertar(it) }
+            salidas.forEach { db.salidaDao().insertar(it) }
+            asignaciones.forEach { db.asignacionDao().insertar(it) }
         }
     }
 }

@@ -20,46 +20,9 @@ data class DisponibilidadHoraria(
     val estado: String
 )
 
-
-
-
 data class GaleriaMultimedia(
     val recursoId: Int,
     val temploId: Int,
     val tipoRecurso: String,
     val urlRecurso: String
 )
-
-data class RutaPatrimonial(
-    val rutaId: Int,
-    val usuarioCreadorId: Int,
-    val nombreRuta: String,
-    val tiempoEstimadoTotal: Double,
-    val estado: String
-)
-
-data class ParadaRuta(
-    val paradaId: Int,
-    val rutaId: Int,
-    val temploId: Int,
-    val orden: Int,
-    val tiempoEstimadoTraslado: Double
-)
-
-data class SalidaPedagogica(
-    val salidaId: Int,
-    val colegioId: Int,
-    val rutaId: Int,
-    val fechaSalida: String,
-    val cantidadEstudiantes: Int,
-    val estado: String
-)
-
-data class AsignacionGuia(
-    val asignacionId: Int,
-    val rutaId: Int,
-    val guiaId: Int,
-    val fechaAsignacion: String,
-    val estadoAsignacion: String
-)
-

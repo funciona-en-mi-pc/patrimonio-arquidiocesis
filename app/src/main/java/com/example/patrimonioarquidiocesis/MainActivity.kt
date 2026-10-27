@@ -17,9 +17,11 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            PatrimonioArquidiocesisTheme {
-                val mainViewModel: MainViewModel = viewModel()
-                val rutaInicial by mainViewModel.rutaInicial.collectAsState()
+            val mainViewModel: MainViewModel = viewModel()
+            val rutaInicial by mainViewModel.rutaInicial.collectAsState()
+            val temaOscuro by mainViewModel.temaOscuro.collectAsState()
+
+            PatrimonioArquidiocesisTheme(darkTheme = temaOscuro) {
 
                 if (rutaInicial == null) {
                     Cargando()

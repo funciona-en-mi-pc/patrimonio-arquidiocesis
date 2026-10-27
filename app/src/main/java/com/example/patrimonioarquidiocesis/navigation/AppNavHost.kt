@@ -1,14 +1,10 @@
 package com.example.patrimonioarquidiocesis.navigation
 
 
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -21,6 +17,11 @@ import com.example.patrimonioarquidiocesis.view.LoginScreen
 import com.example.patrimonioarquidiocesis.view.components.BottomBar
 import com.example.patrimonioarquidiocesis.model.Constantes
 import com.example.patrimonioarquidiocesis.view.AgendaScreen
+import com.example.patrimonioarquidiocesis.view.ArmarRutaScreen
+import com.example.patrimonioarquidiocesis.view.DetalleRutaScreen
+import com.example.patrimonioarquidiocesis.view.MisAsignacionesScreen
+import com.example.patrimonioarquidiocesis.view.PerfilScreen
+import com.example.patrimonioarquidiocesis.view.SalidaPedagogicaScreen
 import com.example.patrimonioarquidiocesis.view.FichaTemploScreen
 import com.example.patrimonioarquidiocesis.view.HorariosScreen
 import com.example.patrimonioarquidiocesis.view.NotificacionesScreen
@@ -32,13 +33,13 @@ import com.example.patrimonioarquidiocesis.view.RegistroScreen
 fun AppNavHost(rutaInicial: String){
     val navController = rememberNavController()
     val rutasConBarra = listOf(Rutas.INICIO, Rutas.AGENDA, Rutas.ARMAR_RUTA, Rutas.PERFIL)
-    val baskStarckEntry by navController.currentBackStackEntryAsState()
-    val rutaAltual = baskStarckEntry?.destination?.route
+    val backStackEntry by navController.currentBackStackEntryAsState()
+    val rutaActual = backStackEntry?.destination?.route
 
     Scaffold(
         bottomBar = {
-            if (rutaAltual in rutasConBarra){
-                BottomBar(navController, rutaAltual)
+            if (rutaActual in rutasConBarra){
+                BottomBar(navController, rutaActual)
             }
         }
     ) {
@@ -86,20 +87,19 @@ fun AppNavHost(rutaInicial: String){
             }
             composable(Rutas.AGENDA){ AgendaScreen() }
             composable(Rutas.NOTIFICACIONES){ NotificacionesScreen(navController) }
-            composable(Rutas.PERFIL){ PantallaVacia("Perfil") }
-            composable(Rutas.ARMAR_RUTA){ PantallaVacia("Armar ruta") }
-            composable(Rutas.DETALLE_RUTA){ PantallaVacia("Detalle de ruta") }
-            composable(Rutas.SALIDA_PEDAGOGICA){ PantallaVacia("Planificar salida") }
-            composable(Rutas.MIS_ASIGNACIONES){ PantallaVacia("Mis asignaciones") }
+            composable(Rutas.PERFIL){ PerfilScreen(navController) }
+            composable(Rutas.ARMAR_RUTA){ ArmarRutaScreen(navController) }
+            composable(
+                route = Rutas.DETALLE_RUTA,
+                arguments = listOf(navArgument("rutaId") { type = NavType.IntType })
+            ) { backStackEntry ->
+                val rutaId = backStackEntry.arguments?.getInt("rutaId") ?: 0
+                DetalleRutaScreen(navController, rutaId)
+            }
+            composable(Rutas.SALIDA_PEDAGOGICA){ SalidaPedagogicaScreen(navController) }
+            composable(Rutas.MIS_ASIGNACIONES){ MisAsignacionesScreen(navController) }
             composable(Rutas.PANEL_ENCARGADO){ PanelEncargadoScreen(navController) }
             composable(Rutas.NUEVO_EVENTO){ NuevoEventoScreen(navController) }
         }
     }
-}
-@Composable
-private fun PantallaVacia(nombre: String){
-    Text(
-        text = nombre,
-        modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.Center)
-    )
 }
