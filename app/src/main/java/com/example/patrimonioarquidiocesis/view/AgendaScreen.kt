@@ -115,6 +115,9 @@ private fun EventoItem(evento: EventoCultural, nombreTemplo: String) {
                 Text(text = evento.nombreEvento, fontWeight = FontWeight.Bold)
                 Text(text = "$nombreTemplo · $hora", fontSize = 12.sp, color = TintaSuave)
                 Text(text = nombreTipo(evento.tipoEvento), fontSize = 12.sp, color = Terracota, fontWeight = FontWeight.Bold)
+                if (evento.descripcion.isNotBlank()) {
+                    Text(text = evento.descripcion, fontSize = 13.sp)
+                }
             }
         }
     }
