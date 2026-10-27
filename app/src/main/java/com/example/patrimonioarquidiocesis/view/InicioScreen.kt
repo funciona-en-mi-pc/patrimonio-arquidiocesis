@@ -1,5 +1,6 @@
 package com.example.patrimonioarquidiocesis.view
 
+import android.widget.Toast
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -17,12 +18,14 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -33,6 +36,7 @@ import com.example.patrimonioarquidiocesis.navigation.Rutas
 import com.example.patrimonioarquidiocesis.ui.theme.PiedraOscura
 import com.example.patrimonioarquidiocesis.view.components.TemploCard
 import com.example.patrimonioarquidiocesis.viewmodel.InicioViewModel
+import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
 
 @Composable
 fun InicioScreen(
@@ -41,6 +45,7 @@ fun InicioScreen(
 ) {
     val templos by inicioViewModel.templos.collectAsState()
     val estados by inicioViewModel.estados.collectAsState()
+    val context = LocalContext.current
 
     val lista = templos
 
@@ -79,6 +84,24 @@ fun InicioScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(text = "Mapa interactivo")
+            }
+
+            // QR: cada templo tiene un QR con su temploId; al leerlo se abre su Ficha
+            OutlinedButton(
+                onClick = {
+                    val lector = GmsBarcodeScanning.getClient(context)
+                    lector.startScan().addOnSuccessListener { codigo ->
+                        val temploId = codigo.rawValue?.toIntOrNull()
+                        if (temploId != null && lista.any { it.temploId == temploId }) {
+                            navController.navigate(Rutas.TEMPLO.replace("{temploId}", temploId.toString()))
+                        } else {
+                            Toast.makeText(context, "El QR no corresponde a un templo", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                },
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text(text = "Escanear QR del templo")
             }
 
             Text(text = "Cerca de ti", fontSize = 18.sp, fontWeight = FontWeight.Bold)
