@@ -41,8 +41,8 @@ fun BottomBar(navController: NavController, rutaActual: String?){
             label = { Text("Rutas") }
         )
         NavigationBarItem(
-            selected = rutaActual == Rutas.INICIO,
-            onClick = { navController.navigate(Rutas.INICIO)},
+            selected = rutaActual == Rutas.PERFIL,
+            onClick = { navController.navigate(Rutas.PERFIL)},
             icon = {Icon(Icons.Default.Person, contentDescription = "Perfil") },
             label = { Text("Perfil") }
         )

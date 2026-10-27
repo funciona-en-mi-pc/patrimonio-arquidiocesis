@@ -32,13 +32,13 @@ import com.example.patrimonioarquidiocesis.view.RegistroScreen
 fun AppNavHost(rutaInicial: String){
     val navController = rememberNavController()
     val rutasConBarra = listOf(Rutas.INICIO, Rutas.AGENDA, Rutas.ARMAR_RUTA, Rutas.PERFIL)
-    val baskStarckEntry by navController.currentBackStackEntryAsState()
-    val rutaAltual = baskStarckEntry?.destination?.route
+    val backStackEntry by navController.currentBackStackEntryAsState()
+    val rutaActual = backStackEntry?.destination?.route
 
     Scaffold(
         bottomBar = {
-            if (rutaAltual in rutasConBarra){
-                BottomBar(navController, rutaAltual)
+            if (rutaActual in rutasConBarra){
+                BottomBar(navController, rutaActual)
             }
         }
     ) {
