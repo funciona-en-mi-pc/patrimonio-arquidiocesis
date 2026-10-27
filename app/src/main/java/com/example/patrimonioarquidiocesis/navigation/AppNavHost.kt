@@ -23,6 +23,7 @@ import com.example.patrimonioarquidiocesis.model.Constantes
 import com.example.patrimonioarquidiocesis.view.AgendaScreen
 import com.example.patrimonioarquidiocesis.view.FichaTemploScreen
 import com.example.patrimonioarquidiocesis.view.HorariosScreen
+import com.example.patrimonioarquidiocesis.view.NotificacionesScreen
 import com.example.patrimonioarquidiocesis.view.RegistroScreen
 
 @Composable
@@ -82,7 +83,7 @@ fun AppNavHost(rutaInicial: String){
                 HorariosScreen(navController, temploId)
             }
             composable(Rutas.AGENDA){ AgendaScreen() }
-            composable(Rutas.NOTIFICACIONES){ PantallaVacia("Notificaciones") }
+            composable(Rutas.NOTIFICACIONES){ NotificacionesScreen(navController) }
             composable(Rutas.PERFIL){ PantallaVacia("Perfil") }
             composable(Rutas.ARMAR_RUTA){ PantallaVacia("Armar ruta") }
             composable(Rutas.DETALLE_RUTA){ PantallaVacia("Detalle de ruta") }
