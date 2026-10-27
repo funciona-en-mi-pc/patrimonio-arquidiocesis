@@ -20,23 +20,8 @@ data class DisponibilidadHoraria(
     val estado: String
 )
 
-data class AvisoNotificacion(
-    val avisoId: Int,
-    val temploId: Int,
-    val tipoAviso: String,
-    val mensaje: String,
-    val fechaHora: String,
-    val sincronizado: Boolean
-)
 
-data class EventoCultural(
-    val eventoId: Int,
-    val temploId: Int,
-    val nombreEvento: String,
-    val tipoEvento: String,
-    val fechaHora: String,
-    val descripcion: String,
-)
+
 
 data class GaleriaMultimedia(
     val recursoId: Int,
