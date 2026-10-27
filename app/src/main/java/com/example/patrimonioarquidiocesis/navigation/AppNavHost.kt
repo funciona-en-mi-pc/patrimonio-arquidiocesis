@@ -24,6 +24,7 @@ import com.example.patrimonioarquidiocesis.view.AgendaScreen
 import com.example.patrimonioarquidiocesis.view.FichaTemploScreen
 import com.example.patrimonioarquidiocesis.view.HorariosScreen
 import com.example.patrimonioarquidiocesis.view.NotificacionesScreen
+import com.example.patrimonioarquidiocesis.view.PanelEncargadoScreen
 import com.example.patrimonioarquidiocesis.view.RegistroScreen
 
 @Composable
@@ -89,7 +90,7 @@ fun AppNavHost(rutaInicial: String){
             composable(Rutas.DETALLE_RUTA){ PantallaVacia("Detalle de ruta") }
             composable(Rutas.SALIDA_PEDAGOGICA){ PantallaVacia("Planificar salida") }
             composable(Rutas.MIS_ASIGNACIONES){ PantallaVacia("Mis asignaciones") }
-            composable(Rutas.PANEL_ENCARGADO){ PantallaVacia("Panel del encargado") }
+            composable(Rutas.PANEL_ENCARGADO){ PanelEncargadoScreen(navController) }
             composable(Rutas.NUEVO_EVENTO){ PantallaVacia("Nuevo evento") }
         }
     }
