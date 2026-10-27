@@ -16,5 +16,21 @@ object Constantes{
     const val EVENTO_CONCIERTO = "CONCIERTO"
     const val EVENTO_EXPOSICION = "EXPOSICION"
 
+    //Estados de ruta
+    const val RUTA_BORRADOR = "BORRADOR"
+    const val RUTA_CONFIRMADA = "CONFIRMADA"
+
+    //Estados de asignación del guía
+    const val ASIGNACION_PENDIENTE = "PENDIENTE"
+    const val ASIGNACION_CONFIRMADA = "CONFIRMADA"
+    const val ASIGNACION_RECHAZADA = "RECHAZADA"
+
+    //Estados de salida pedagógica
+    const val SALIDA_PENDIENTE = "PENDIENTE"
+
+    //Tiempos para calcular la duración de una ruta (en minutos)
+    const val MINUTOS_VISITA = 13
+    const val MINUTOS_TRASLADO = 12
+
 }
 
