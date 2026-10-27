@@ -62,5 +62,11 @@ object DatosEjemplo {
         if (db.usuarioDao().contar() == 0) {
             usuarios.forEach { db.usuarioDao().insertar(it) }
         }
+        if (db.eventoDao().contar() == 0) {
+            eventos.forEach { db.eventoDao().insertar(it) }
+        }
+        if (db.avisoDao().contar() == 0) {
+            avisos.forEach { db.avisoDao().insertar(it) }
+        }
     }
 }
